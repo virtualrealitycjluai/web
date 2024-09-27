@@ -1,5 +1,5 @@
 这是代码测试
 000000000
 接下来随便写点push上去
-再试试同步操
+再试试同步操作
 make zhangguijing great again!
