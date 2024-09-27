@@ -1,0 +1,225 @@
+@import "./normalize.css";
+
+
+/* .amap-marker-label {
+	position: absolute;
+	z-index: 2;
+	border: none;
+	background: url('~assets/images/textBG.png');
+	background-size: 100% 100%;
+	white-space: nowrap;
+	cursor: default;
+	font-size: 12px;
+	line-height: 14px;
+	padding: 0px;
+} */
+
+/* @font-face {
+	font-family: 'NotoSansHans-Regular';
+	src: url('../fonts/NotoSansHans-Regular.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'pmzdbt';
+	src: url('../fonts/pmzdbt.ttf') format('truetype');
+} */
+
+/* body {
+	font-family: 'NotoSansHans-Regular', sans-serif;
+} */
+
+body {
+	margin: 0;
+	padding: 0;
+	/* width: 100vw;
+	height: 100vh; */
+	overflow: hidden;
+}
+
+a {
+	text-decoration: none;
+	/* 去除默认的下划线 */
+	outline: none;
+	/* 去除旧版浏览器的点击后的外虚线框 */
+	color: #000;
+	/* 去除默认的颜色和点击后变化的颜色 */
+}
+
+.banners .swiper-pagination-bullet-active {
+	background-color: aliceblue !important;
+}
+
+.router-link-active {
+	text-decoration: none;
+}
+
+.amap-logo {
+	display: none !important;
+}
+
+.amap-copyright {
+	opacity: 0;
+}
+
+/* .amap-marker-label {
+    display: none;
+} */
+
+::-webkit-scrollbar {
+	display: none !important;
+	width: 0px;
+	height: 0px;
+}
+
+textarea,
+input {
+	outline: none;
+}
+
+input::-webkit-input-placeholder {
+	color: #999;
+}
+
+input::-moz-input-placeholder {
+	color: #999;
+}
+
+input::-ms-input-placeholder {
+	color: #999;
+}
+
+textarea::-webkit-input-placeholder {
+	/* WebKit browsers */
+	color: #999;
+}
+
+textarea:-moz-placeholder {
+	/* Mozilla Firefox 4 to 18 */
+	color: #999;
+}
+
+textarea::-ms-input-placeholder {
+	/* Internet Explorer 10+ */
+	color: #999;
+}
+
+
+/* .buttonDom {
+	width: 38px;
+	height: 38px;
+	background: url('~assets/images/local1.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+} */
+
+.park,
+.stop {
+	width: 30px;
+	height: 30px;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+/* .park {
+	background: url('~assets/images/park.png');
+}
+
+.parks {
+	background: url('~assets/images/parks.png');
+}
+
+.stop {
+	background: url('~assets/images/stop.png');
+}
+
+.stops {
+	background: url('~assets/images/stops.png');
+} */
+
+/* 以下是去除移动端阴影操作 */
+a,
+a:hover,
+a:active,
+a:visited,
+a:link,
+a:focus {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-tap-highlight-color: transparent;
+	outline: none;
+	background: none;
+	text-decoration: none;
+}
+
+::selection {
+	background: #FFF;
+	color: #333;
+}
+
+::-moz-selection {
+	background: #FFF;
+	color: #333;
+}
+
+::-webkit-selection {
+	background: #FFF;
+	color: #333;
+}
+
+-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+
+html,
+body {
+	-webkit-text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+input,
+textarea {
+	-webkit-appearance: @none;
+}
+
+div,
+a,
+span {
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* vue 实现页面内容禁止选中功能 */
+* {
+	-webkit-touch-callout: none;
+	/*系统默认菜单被禁用*/
+	-webkit-user-select: none;
+	/*webkit浏览器*/
+	-khtml-user-select: none;
+	/*早期浏览器*/
+	-moz-user-select: none;
+	/*火狐*/
+	-ms-user-select: none;
+	/*IE10*/
+	user-select: none;
+}
+
+input {
+	-webkit-user-select: auto;
+	/*webkit浏览器*/
+}
+
+textarea {
+	-webkit-user-select: auto;
+	/*webkit浏览器*/
+}
+
+.el-scrollbar__thumb {
+	background-color: #fff !important;
+}
+.el-loading-mask{
+	background-color: RGBA(12, 32, 57, 0.3) !important;
+	inset: 0; /* 充满容器 */
+    backdrop-filter: blur(5px); /* 模糊半径 */
+}
+img {
+	-webkit-user-drag: none !important;
+	user-select: none !important;
+  }
