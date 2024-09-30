@@ -15,13 +15,13 @@ const props = defineProps({
     type: String,
     default: "ws://vunity.xuanyantech.com:9801/web",
   },
-  keyValue: { //key
+  keyValue: { //key 已更改
     type: String,
-    default: "110073444a3206dcc219cc9355dfafc5",
+    default: "d21fe88035f6cbc2a81aa25af04e9e5c",
   },
-  secretKeyValue: { //密钥
+  secretKeyValue: { //密钥 已更改
     type: String,
-    default: "f4b8a678acdb585bb516df02270de35f",
+    default: "09377afd9f59d165e1f775de7012ab78",
   }
 });
 
