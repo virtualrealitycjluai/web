@@ -127,7 +127,7 @@ function navigationClick(index) {
     else if (index === 5) {
         //文化景点
         viewId = "2857";
-        type.typeDatas = [];
+        type.typeDatas = ["1243"];
     }
     else if (index === 6) {
         //道路
