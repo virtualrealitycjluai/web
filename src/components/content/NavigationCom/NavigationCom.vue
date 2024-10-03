@@ -18,7 +18,7 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref, defineEmits } from "vue";
-const navData = ["总览", "东校区", "东生活区", "西校区", "西生活区", "文化景点", "道"];
+const navData = ["总览", "东校区", "东生活区", "西校区", "西生活区", "文化景点", "道路"];
 const navIndex = ref(0);
 const emits = defineEmits(["navigationClick"]);
 onMounted(() => {
