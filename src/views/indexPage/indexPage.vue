@@ -101,7 +101,7 @@ function navigationClick(index) {
     let type = { typeDatas: [] };//类型数据
     if (index === 0) {
         //楼宇
-        viewId = "2306";
+        viewId = "2838";
         type.typeDatas = ["1186"];
     }
     else if (index === 1) {
