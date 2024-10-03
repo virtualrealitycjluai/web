@@ -91,7 +91,7 @@ onMounted(() => {
 
 //场景漫游点击
 function sceneAnmClick(){
-    let anmData = {roamId:"76",IsLoop:"0"};
+    let anmData = {roamId:"90",IsLoop:"0"};
     mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
 }
 
