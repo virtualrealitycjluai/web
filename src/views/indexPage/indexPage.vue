@@ -106,27 +106,27 @@ function navigationClick(index) {
     }
     else if (index === 1) {
         //道路
-        viewId = "2307";
+        viewId = "2618";
         type.typeDatas = ["1187"];
     }
     else if (index === 2) {
         //景观
-        viewId = "2308";
+        viewId = "2619";
         type.typeDatas = ["1188"];
     }
     else if (index === 3) {
         //文化景点
-        viewId = "2309";
+        viewId = "2620";
         type.typeDatas = ["1189"];
     }
     else if (index === 4) {
         //寝室楼
-        viewId = "2310";
+        viewId = "2621";
         type.typeDatas = [];
     }
     else if (index === 5) {
         //校园餐厅
-        viewId = "2311";
+        viewId = "2622";
         type.typeDatas = [];
     }
 
