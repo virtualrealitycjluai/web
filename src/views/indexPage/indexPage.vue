@@ -102,12 +102,12 @@ function navigationClick(index) {
     if (index === 0) {
         //总览
         viewId = "2838";
-        type.typeDatas = ["1186"];
+        type.typeDatas = [""];
     }
     else if (index === 1) {
         //东校区
         viewId = "2842";
-        type.typeDatas = ["5000"];
+        type.typeDatas = ["1247"];
     }
     else if (index === 2) {
         //东生活区
@@ -117,7 +117,7 @@ function navigationClick(index) {
     else if (index === 3) {
         //西校区
         viewId = "2843";
-        type.typeDatas = ["1189"];
+        type.typeDatas = ["1241"];
     }
     else if (index === 4) {
         //西生活区
@@ -132,7 +132,7 @@ function navigationClick(index) {
     else if (index === 6) {
         //道路
         viewId = "2856";
-        type.typeDatas = [];
+        type.typeDatas = ["1240"];
     }
 
     //切换场景视角
