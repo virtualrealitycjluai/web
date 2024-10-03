@@ -107,7 +107,7 @@ function navigationClick(index) {
     else if (index === 1) {
         //东校区
         viewId = "2842";
-        type.typeDatas = ["1187"];
+        type.typeDatas = ["5000"];
     }
     else if (index === 2) {
         //东生活区
