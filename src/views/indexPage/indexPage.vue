@@ -112,7 +112,7 @@ function navigationClick(index) {
     else if (index === 2) {
         //东生活区
         viewId = "2854";
-        type.typeDatas = ["1188"];
+        type.typeDatas = ["1249"];
     }
     else if (index === 3) {
         //西校区
@@ -122,7 +122,7 @@ function navigationClick(index) {
     else if (index === 4) {
         //西生活区
         viewId = "2855";
-        type.typeDatas = [];
+        type.typeDatas = ["1245"];
     }
     else if (index === 5) {
         //文化景点

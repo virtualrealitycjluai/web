@@ -20,7 +20,7 @@ function sceneAnmClick(){
 .cartoon-com {
     width: 32vh;
     height: 23.5vh;
-    background-image: url("./images/cartoon-icon.png");
+    background-image: url("./images/cartoon-icon2.png");
     background-size: 100% 100%;
     position: absolute;
     right: 0;
