@@ -71,6 +71,10 @@ onMounted(() => {
 onUnmounted(() => {
     window.clearInterval(setInTime)
 })
+//获得当前选中的campusGroup值
+// function getCurrentCampus() {  
+//   return campusGroup.value[theCampusIndex.value];  
+// }
 </script>
 <style lang="scss">
 .el-dropdown-link {
