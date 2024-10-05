@@ -9,6 +9,7 @@
 <template>
     <div :class="`content-com content-com-size${styleId}`">
         <img src="./images/close-icon.png" class="close-btn" @click="closeBtnClick" alt="">
+        <img src="./images/scene-anm.png" class="scene-exploration" alt="" @click.stop="sceneAnmClick" />
         <slot />
     </div>
 </template>
@@ -29,7 +30,11 @@ onUnmounted(() => {
 function closeBtnClick(){
     emits("closeBtnClick");
 }
+
 </script>
+
+
+
 <style lang="scss">
 .content-com-size0 {
     height: 58vh;
@@ -74,6 +79,15 @@ function closeBtnClick(){
         top: 1.5vh;
         right: 1.5vh;
         cursor: pointer;
+    }
+    .scene-exploration {
+        width: 7vh;
+        height: 1.6vh;
+        position: absolute;
+        bottom: 3.8vh;
+        right: 1.9vh;
+        cursor: pointer;
+
     }
 }
 </style>
