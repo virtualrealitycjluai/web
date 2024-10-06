@@ -9,8 +9,9 @@
 <template>
     <div :class="`content-com content-com-size${styleId}`">
         <img src="./images/close-icon.png" class="close-btn" @click="closeBtnClick" alt="">
-        <img src="./images/scene-anm.png" class="scene-exploration" alt="" @click.stop="sceneAnmClick" />
         <slot />
+        <img src="./images/scene-anm.png" class="scene-exploration" alt="" @click="sceneAnmClick" @click.stop="effectDisplay"/>
+        
     </div>
 </template>
 
@@ -22,7 +23,7 @@ defineProps({
         default: 0
     },
 });
-const emits = defineEmits(["closeBtnClick"]);
+const emits = defineEmits(["closeBtnClick", "sceneAnmClick", "effectDisplay"]);
 onMounted(() => {
 });
 onUnmounted(() => {
@@ -30,7 +31,16 @@ onUnmounted(() => {
 function closeBtnClick(){
     emits("closeBtnClick");
 }
-
+function sceneAnmClick(){
+    console.log("开启场景漫游");
+    emits("sceneAnmClick");
+    emits("closeBtnClick");
+}
+function effectDisplay(){
+    console.log("开启特效");
+    emits("effectDisplay");
+    emits("closeBtnClick");
+}
 </script>
 
 
@@ -87,7 +97,6 @@ function closeBtnClick(){
         bottom: 3.8vh;
         right: 1.9vh;
         cursor: pointer;
-
     }
 }
 </style>

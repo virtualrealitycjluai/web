@@ -14,7 +14,7 @@
         <!-- 右侧按钮 -->
         <OperateBtnCom :data="operateData" @operateBtnClick="operateBtnClick" />
         <!-- 点位详情页 -->
-        <ContentCom :styleId="3" v-if="pointDetailsData" @closeBtnClick="pointDetailsData = null">
+        <ContentCom :styleId="3" v-if="pointDetailsData" @closeBtnClick="pointDetailsData = null" @sceneAnmClick="sceneAnmClick">
             <GlobalTitle :title="pointDetailsData.name" style="margin-top:3vh;" />
             <details-content :data="pointDetailsData" :htmlBool="true" style="padding: 2vh 0;box-sizing: border-box;" />
         </ContentCom>
@@ -91,7 +91,7 @@ onMounted(() => {
 
 //场景漫游点击
 function sceneAnmClick(){//要改成接受web端点击标签关联的漫游路线编号
-    let anmData = {roamId:"134", IsLoop:"0"};
+    let anmData = {roamId:"102", IsLoop:"0"};
     mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
 }
 // //特效显示

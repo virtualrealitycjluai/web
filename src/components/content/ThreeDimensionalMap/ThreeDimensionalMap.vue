@@ -72,6 +72,12 @@ function start(socketUrl, key, secret) {
     callAction("switchPointView", pointData.index_code);//切换点位视角
     bus.emit("pointClickComplete", pointData);
   });
+  //监听漫游结束
+  socket.value.on("roamEndComplete", () => {
+    console.log("漫游结束事件");
+    bus.emit("roamEndComplete");
+  });
+
 }
 
 function emitStart() {
