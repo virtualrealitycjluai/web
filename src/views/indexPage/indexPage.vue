@@ -94,30 +94,30 @@ function sceneAnmClick(){//要改成接受web端点击标签关联的漫游路�
     let anmData = {roamId:"102", IsLoop:"0"};
     mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
 }
-// //特效显示
+//特效显示
 // function effectDisplay(){
 //     let effectId = "139";//实际上要获取点击web端标签获得的POI点位的id
-//     mapDom.value.callAction("displayEffect",effectId);
+//     mapDom.value.callAction("displayEffect", effectId);
 // }
-// //特效隐藏
+//特效隐藏
 // function effectHide(){
 //     let effectId = "139";//实际上要获取点击web端标签获得的POI点位的id
 //     mapDom.value.callAction("hideEffect",effectId);
 // }
-// //POI点位视角推进
+//POI点位视角推进
 // function pointViewSwitch(poiId){//要获取web端点击获得设备编号
 //     mapDom.value.callAction("switchpointView",poiId);
 // }
-// //POI点位视角返回
+//POI点位视角返回
 // function pointViewBack(poiId){//要获取web端点击获得设备编号
 //     mapDom.value.callAction("backToPointView",poiId);
 // }
-// //临时自定义点位
+//临时自定义点位
 // function customPointSet(poiMessage){//poiMessage是一个web端传入的自定义点位的信息数组
 //     //参数说明详见文档
 //     mapDom.value.callAction("setCustomPoint",poiMessage);
 // }
-// //线面绘制，先看特效显示的效果
+//线面绘制，先看特效显示的效果
 
 
 //NavigationCom关联的点击事件

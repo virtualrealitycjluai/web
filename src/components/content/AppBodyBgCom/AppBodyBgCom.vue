@@ -10,7 +10,7 @@
     <div class="app-top">
         <img src="./images/labelTop.png" class="app-top-bg" alt="">
         <div class="app-title">
-            量大校园文化导览
+            量大校园地图
         </div>
         <div class="app-menu">
             <el-dropdown>
@@ -23,7 +23,7 @@
                 <template #dropdown>
                     <div class="app-menu-view">
                         <div class="app-menu-view-child" v-for="(item, index) in campusGroup" :key="index"
-                            @click="theCampusIndex = index">{{ item }}</div>
+                            @click="theCampusIndex = index; selectCampus(index)">{{ item }}</div>
                     </div>
                 </template>
             </el-dropdown>
@@ -43,7 +43,10 @@
 import { ArrowDown } from '@element-plus/icons-vue'
 import { onMounted, onUnmounted, ref } from "vue";
 import { getTime, getTimeChinese, getDayOfWeek } from "@/utils/getTime";
+import { inject } from "vue";
 const theCampusIndex = ref(0);
+
+let mapDom = inject("mapDom");
 
 const campusGroup = ref(["东校区", "西校区"]);
 var yearMonthDay = ref('00年00月00天')//年月日时间
@@ -71,10 +74,16 @@ onMounted(() => {
 onUnmounted(() => {
     window.clearInterval(setInTime)
 })
-//获得当前选中的campusGroup值
-// function getCurrentCampus() {  
-//   return campusGroup.value[theCampusIndex.value];  
-// }
+//切换东西校区视角
+function selectCampus(index) {
+  if (index === 0) {
+    console.log("东校区");
+    mapDom.value.callAction("switchSceneView","2842");
+  } else {
+    console.log("西校区");
+    mapDom.value.callAction("switchSceneView","2843");
+  }
+}
 </script>
 <style lang="scss">
 .el-dropdown-link {
