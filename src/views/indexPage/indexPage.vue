@@ -38,7 +38,6 @@
             </template>
         </ContentCom>
         <!-- 卡通人物 -->
-
         <div class="quit-style">退出</div>
     </div>
 </template>

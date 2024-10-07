@@ -17,8 +17,10 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, defineProps, defineEmits, inject } from "vue";
+import bus from '@/utils/bus.js'
 let mapDom = inject("mapDom");
 const showContent = ref(true); // 控制 <div> 的显示
+let id = "";//存储id
 defineProps({
     styleId: {
         type: Number,
@@ -30,7 +32,13 @@ const emits = defineEmits(["closeBtnClick", "sceneAnmClick", "switchSceneView", 
 onMounted(() => {
 });
 onUnmounted(() => {
+    //接受点位点击的数据
+    bus.on('pointClickComplete', (pointData) => {
+        console.log("Contencom点位id",pointData.index_code);
+        id = pointData.index_code;//id是全局变量，可以在后面使用
+    });
 })
+
 function closeBtnClick(){
     emits("closeBtnClick");
 }
@@ -38,7 +46,11 @@ function closeBtnClick(){
 function effectDisplay(){
     console.log("开启特效");
     showContent.value = false; // 隐藏 <div>
-    mapDom.value.callAction("switchSceneView", "2843");
+    if(id==="31"){
+        mapDom.value.callAction("switchSceneView", "2843");
+        mapDom.value.callAction("displayEffect", "139");
+    }
+    mapDom.value.callAction("switchSceneView", "2843");//放在条件判断中，这是东校区中转视角，还有个西校区的
     mapDom.value.callAction("displayEffect", "139");
 }
 

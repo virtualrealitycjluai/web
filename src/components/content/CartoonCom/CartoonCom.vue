@@ -1,6 +1,6 @@
 <template>
     <div class="cartoon-com" @click="showTalkBool = !showTalkBool">
-        <div class="talk-style" v-if="!showTalkBool" @click.stop>
+        <div class="talk-style" v-if="showTalkBool" @click.stop>
             量量可以带你场景漫游呦。
             <img src="./images/scene-anm.png" alt="" @click.stop="sceneAnmClick" />
         </div>
