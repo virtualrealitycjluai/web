@@ -164,6 +164,7 @@ function navigationClick(index) {
     //切换场景视角
     if (viewId) mapDom.value.callAction("switchSceneView", viewId)
     mapDom.value.callAction("toggleTypePointVisibility", JSON.stringify(type));
+    mapDom.value.callAction("displayEffect", "139");
 }
 
 //右侧分类点击
