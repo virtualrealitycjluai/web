@@ -15,14 +15,15 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, defineProps, defineEmits } from "vue";
+import { onMounted, onUnmounted, defineProps, defineEmits, inject } from "vue";
+let mapDom = inject("mapDom");
 defineProps({
     styleId: {
         type: Number,
         default: 0
     },
 });
-const emits = defineEmits(["closeBtnClick", "sceneAnmClick", "effectDisplay"]);
+const emits = defineEmits(["closeBtnClick", "sceneAnmClick", "effectDisplay", "switchSceneView"]);
 onMounted(() => {
 });
 onUnmounted(() => {
@@ -32,8 +33,9 @@ function closeBtnClick(){
 }
 function sceneAnmClick(){
     console.log("开启场景漫游");
-    emits("sceneAnmClick");
     emits("closeBtnClick");
+    mapDom.value.callAction("switchSceneView", "2838");
+    emits("sceneAnmClick");
 }
 </script>
 
