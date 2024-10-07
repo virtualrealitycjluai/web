@@ -7,23 +7,26 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-    <div :class="`content-com content-com-size${styleId}`">
+    <div v-if="showContent" :class="`content-com content-com-size${styleId}`">
         <img src="./images/close-icon.png" class="close-btn" @click="closeBtnClick" alt="">
         <slot />
-        <img src="./images/scene-anm.png" class="scene-exploration" alt="" @click.stop="sceneAnmClick"/>     
+        <img src="./images/scene-anm.png" class="scene-exploration" alt="" @click.stop="effectDisplay"/>
     </div>
+    <CartoonCom @sceneAnmClick="sceneAnmClick"/>
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, defineProps, defineEmits, inject } from "vue";
+import { ref, onMounted, onUnmounted, defineProps, defineEmits, inject } from "vue";
 let mapDom = inject("mapDom");
+const showContent = ref(true); // 控制 <div> 的显示
 defineProps({
     styleId: {
         type: Number,
         default: 0
     },
 });
-const emits = defineEmits(["closeBtnClick", "sceneAnmClick", "effectDisplay", "switchSceneView"]);
+
+const emits = defineEmits(["closeBtnClick", "sceneAnmClick", "switchSceneView", "effectDisplay"]);
 onMounted(() => {
 });
 onUnmounted(() => {
@@ -31,11 +34,19 @@ onUnmounted(() => {
 function closeBtnClick(){
     emits("closeBtnClick");
 }
+
+function effectDisplay(){
+    console.log("开启特效");
+    showContent.value = false; // 隐藏 <div>
+    mapDom.value.callAction("switchSceneView", "2843");
+    mapDom.value.callAction("displayEffect", "139");
+}
+
 function sceneAnmClick(){
     console.log("开启场景漫游");
-    emits("closeBtnClick");
-    mapDom.value.callAction("switchSceneView", "2838");
     emits("sceneAnmClick");
+    mapDom.value.callAction("hideEffect", "139");
+    emits("closeBtnClick");
 }
 </script>
 

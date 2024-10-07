@@ -9,7 +9,6 @@ import bus from '@/utils/bus.js'
 import io from "socket.io-client";
 import CryptoJS from 'crypto-js';
 import { onMounted, ref, defineProps, defineExpose } from "vue";
-import { provide } from 'vue'; 
 
 const props = defineProps({
   socketUrlValue: { //socket链接地址
@@ -122,12 +121,6 @@ function getTime() {
 defineExpose({
   callAction
 });
-//顶部导航栏切换视角
-function switchSceneView(viewId) {
-  console.log("顶部导航栏视角切换")
-  callAction("switchSceneView", viewId);
-}
-provide('switchSceneView', switchSceneView);
 </script>
 <style lang="scss" scoped>
 .dimensional-map {
