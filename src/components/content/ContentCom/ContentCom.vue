@@ -16,11 +16,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, defineProps, defineEmits, inject } from "vue";
+import { ref, onMounted, onUnmounted, defineProps, defineEmits, inject, watch } from "vue";
 import bus from '@/utils/bus.js'
 let mapDom = inject("mapDom");
 const showContent = ref(true); // 控制 <div> 的显示
-let id = "";//存储id
+const id = ref("");//存储id
 defineProps({
     styleId: {
         type: Number,
@@ -33,12 +33,17 @@ onMounted(() => {
     //接受点位点击的数据
     bus.on('pointClickComplete', (pointData) => {
         console.log("Contencom点位id",pointData.index_code);
-        id = pointData.index_code;//id是全局变量，可以在后面使用
+        id.value = pointData.index_code;//id是全局变量，可以在后面使用
         console.log("bus:",id);
     });
 });
-onUnmounted(() => {
 
+watch(id, (newId) => {
+    console.log("更新的 id:", newId);
+});
+
+onUnmounted(() => {
+    bus.off('pointClickComplete');
 })
 
 function closeBtnClick(){
@@ -48,7 +53,7 @@ function closeBtnClick(){
 function effectDisplay(){
     console.log("开启特效");
     showContent.value = false; // 隐藏 <div>
-    if(id==="31"){
+    if(id.value==="31"){
         mapDom.value.callAction("switchSceneView", "2843");
         mapDom.value.callAction("displayEffect", "139");
     }
@@ -58,14 +63,15 @@ function effectDisplay(){
 
 function sceneAnmClick(){
     console.log("开启场景漫游");
-    console.log(typeof id);
-    console.log(id);
 
-    let anmData = {roamId:94 + parseInt(id), IsLoop:"0"};
+    console.log(id.value);
+    let anmData = {roamId: 94 + parseInt(id.value), IsLoop: "0"};
+
     emits("sceneAnmClick");
+    mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
     mapDom.value.callAction("hideEffect", "139");
     emits("closeBtnClick");
-    mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
+    
 }
 
 </script>
