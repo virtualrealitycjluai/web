@@ -29,6 +29,12 @@ defineProps({
 });
 
 const emits = defineEmits(["closeBtnClick", "sceneAnmClick", "switchSceneView", "effectDisplay"]);
+const handlePointClickComplete = (pointData) => {
+    console.log("Contencom点位id", pointData.index_code);
+    id.value = pointData.index_code; // id是全局变量，可以在后面使用
+    console.log("bus:", id);
+};
+
 onMounted(() => {
     //接受点位点击的数据
     bus.on('pointClickComplete', (pointData) => {
@@ -37,6 +43,10 @@ onMounted(() => {
         console.log("bus:",id);
     });
 });
+onUnmounted(() => {
+    bus.off('pointClickComplete', handlePointClickComplete);
+});
+
 
 watch(id, (newId) => {
     console.log("更新的 id:", newId);
@@ -52,6 +62,7 @@ function closeBtnClick(){
 
 function effectDisplay(){
     console.log("开启特效");
+    console.log("bus:",id);
     showContent.value = false; // 隐藏 <div>
     if(id.value==="31"){
         mapDom.value.callAction("switchSceneView", "2843");
