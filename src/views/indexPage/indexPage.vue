@@ -88,11 +88,7 @@ onMounted(() => {
    
 });
 
-//场景漫游点击
-function sceneAnmClick(){//要改成接受web端点击标签关联的漫游路线编号
-    let anmData = {roamId:"102", IsLoop:"0"};
-    mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
-}
+
 //特效显示
 // function effectDisplay(){
 //     let effectId = "139";//实际上要获取点击web端标签获得的POI点位的id
