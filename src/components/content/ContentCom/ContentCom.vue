@@ -10,7 +10,7 @@
     <div v-if="showContent" :class="`content-com content-com-size${styleId}`">
         <img src="./images/close-icon.png" class="close-btn" @click="closeBtnClick" alt="">
         <slot />
-        <img src="./images/scene-anm.png" class="scene-exploration" alt="" @click.stop="effectDisplay"/>
+        <img v-if="styleId === 3" src="./images/scene-anm.png" class="scene-exploration" alt="" @click.stop="effectDisplay"/>
     </div>
     <CartoonCom @sceneAnmClick="sceneAnmClick"/>
 </template>
@@ -91,7 +91,14 @@ function sceneAnmClick(){
 .content-com-size2 {
     background-image: url("./images/content-bg2.png");
 }
-
+.scene-exploration {
+    width: 7vh;
+    height: 1.6vh;
+    position: absolute;
+    bottom: 3.8vh;
+    right: 1.9vh;
+    cursor: pointer;
+}
 .content-com {
     background-size: 100% 100%;
     position: fixed;
@@ -110,13 +117,6 @@ function sceneAnmClick(){
         right: 1.5vh;
         cursor: pointer;
     }
-    .scene-exploration {
-        width: 7vh;
-        height: 1.6vh;
-        position: absolute;
-        bottom: 3.8vh;
-        right: 1.9vh;
-        cursor: pointer;
-    }
+
 }
 </style>
