@@ -55,7 +55,7 @@ function navigationClick(index) {
         color: #1F4470;
 
         img {
-            width: 2vh;
+            width: 4vh;
             height: auto;
             margin-right: 1.5vh;
             margin-left: 2.5vh;

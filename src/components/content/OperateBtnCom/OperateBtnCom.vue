@@ -55,10 +55,13 @@ function operateBtnClick(itemData) {
     top: 50%;
     right: 4vh;
     transform: translateY(-50%);
+    background-size: cover;  
+    background-position: center; 
+    background-repeat: no-repeat; 
 
     .operate-btn {
-        width: 7.2vh;
-        height: 7.2vh;
+        width: 10vh;
+        height: 10vh;
         cursor: pointer;
         margin-bottom: 1vh;
     }

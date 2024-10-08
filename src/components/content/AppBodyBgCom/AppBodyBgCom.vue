@@ -101,7 +101,7 @@ function selectCampus(index) {
     .app-menu-view-child {
         line-height: 3vh;
         font-size: 1.5vh;
-        color: #1F4470;
+        color: #1F4470; 
         text-align: center;
         cursor: pointer;
     }
