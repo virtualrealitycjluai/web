@@ -12,7 +12,7 @@
         <slot />
         <img v-if="styleId === 3" src="./images/scene-anm.png" class="scene-exploration" alt="" @click.stop="effectDisplay"/>
     </div>
-    <CartoonCom @sceneAnmClick="sceneAnmClick"/>
+    <CartoonCom v-if="styleId === 3" @sceneAnmClick="sceneAnmClick"/>
 </template>
 
 <script setup>
@@ -34,6 +34,7 @@ onMounted(() => {
     bus.on('pointClickComplete', (pointData) => {
         console.log("Contencom点位id",pointData.index_code);
         id = pointData.index_code;//id是全局变量，可以在后面使用
+        console.log("bus:",id);
     });
 });
 onUnmounted(() => {
@@ -57,10 +58,16 @@ function effectDisplay(){
 
 function sceneAnmClick(){
     console.log("开启场景漫游");
+    console.log(typeof id);
+    console.log(id);
+
+    let anmData = {roamId:94 + parseInt(id), IsLoop:"0"};
     emits("sceneAnmClick");
     mapDom.value.callAction("hideEffect", "139");
     emits("closeBtnClick");
+    mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
 }
+
 </script>
 
 
@@ -91,14 +98,7 @@ function sceneAnmClick(){
 .content-com-size2 {
     background-image: url("./images/content-bg2.png");
 }
-.scene-exploration {
-    width: 7vh;
-    height: 1.6vh;
-    position: absolute;
-    bottom: 3.8vh;
-    right: 1.9vh;
-    cursor: pointer;
-}
+
 .content-com {
     background-size: 100% 100%;
     position: fixed;
@@ -117,6 +117,14 @@ function sceneAnmClick(){
         right: 1.5vh;
         cursor: pointer;
     }
+    .scene-exploration {
+    width: 8.75vh;
+    height: 2vh;
+    position: absolute;
+    bottom: 3.8vh;
+    right: 1.9vh;
+    cursor: pointer;
+}
 
 }
 </style>
