@@ -30,13 +30,14 @@ defineProps({
 
 const emits = defineEmits(["closeBtnClick", "sceneAnmClick", "switchSceneView", "effectDisplay"]);
 onMounted(() => {
-});
-onUnmounted(() => {
     //接受点位点击的数据
     bus.on('pointClickComplete', (pointData) => {
         console.log("Contencom点位id",pointData.index_code);
         id = pointData.index_code;//id是全局变量，可以在后面使用
     });
+});
+onUnmounted(() => {
+
 })
 
 function closeBtnClick(){
