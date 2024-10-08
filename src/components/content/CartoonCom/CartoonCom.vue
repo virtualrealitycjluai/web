@@ -1,16 +1,20 @@
 <template>
     <div class="cartoon-com" @click="showTalkBool = !showTalkBool">
         <div class="talk-style" v-if="showTalkBool" @click.stop>
-            量量可以带你场景漫游呦。
-            <img src="./images/scene-anm.png" alt="" @click.stop="sceneAnmClick" />
+            量量可以带你场景漫游呦。（请先点击“场景漫游”后生成路线后再点击“开始漫游”哦）
+            <img src="./images/scene-anm-2.png" alt="" @click.stop="sceneAnmClick" />
         </div>
+        
     </div>
 </template>
 
 <script setup>
-import { ref, defineEmits } from "vue";
-const showTalkBool = ref(false);//对话框显隐
+import { ref, defineEmits, onMounted } from "vue";
+const showTalkBool = ref(true);//对话框显隐
 const emits = defineEmits(["sceneAnmClick"]);
+onMounted(() => {
+    showTalkBool.value = true; // 确保初始显示
+});
 function sceneAnmClick(){
     showTalkBool.value = false;
     emits("sceneAnmClick");
@@ -20,7 +24,7 @@ function sceneAnmClick(){
 .cartoon-com {
     width: 32vh;
     height: 23.5vh;
-    background-image: url("./images/cartoon-icon2.png");
+    background-image: url("./images/cartoon-icon-2.png");
     background-size: 100% 100%;
     position: absolute;
     right: 0;
@@ -29,7 +33,7 @@ function sceneAnmClick(){
 
     .talk-style {
         width: 26.8vh;
-        height: 12.4vh;
+        height: 15.4vh;
         background-image: url("./images/talk-background.png");
         background-size: 100% 100%;
         position: absolute;
@@ -42,10 +46,11 @@ function sceneAnmClick(){
         font-family: none;
         padding: 2.3vh;
         box-sizing: border-box;
+        opacity: 1;
 
         img {
-            width: 7vh;
-            height: 1.6vh;
+            width: 8.75vh;
+            height: 2vh;
             position: absolute;
             bottom: 3.8vh;
             right: 1.9vh;
