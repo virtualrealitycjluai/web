@@ -14,7 +14,7 @@
         <!-- 右侧按钮 -->
         <OperateBtnCom :data="operateData" @operateBtnClick="operateBtnClick" />
         <!-- 点位详情页 -->
-        <ContentCom :styleId="3" v-if="pointDetailsData" @closeBtnClick="pointDetailsData = null" @sceneAnmClick="sceneAnmClick">
+        <ContentCom :styleId="3" v-if="pointDetailsData" @closeBtnClick="pointDetailsData = null" >
             <GlobalTitle :title="pointDetailsData.name" style="margin-top:3vh;" />
             <details-content :data="pointDetailsData" :htmlBool="true" style="padding: 2vh 0;box-sizing: border-box;" />
         </ContentCom>
