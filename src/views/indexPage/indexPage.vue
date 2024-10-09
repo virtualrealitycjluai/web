@@ -15,7 +15,7 @@
         <OperateBtnCom :data="operateData" @operateBtnClick="operateBtnClick" />
         <!-- 点位详情页 -->
         <ContentCom :styleId="3" v-if="pointDetailsData" @closeBtnClick="pointDetailsData = null"
-            @effectDisplay="effectDisplay" @sceneAnmClick="sceneAnmClick">
+            @effectDisplay="effectDisplay" @sceneAnmClick="sceneAnmClick"> 
             <GlobalTitle :title="pointDetailsData.name" style="margin-top:3vh;" />
             <details-content :data="pointDetailsData" :htmlBool="true" style="padding: 2vh 0;box-sizing: border-box;" />
         </ContentCom>
@@ -215,6 +215,7 @@ function effectDisplay() {
     let effectAnmData0 = 234 + parseInt(thePointData.value.index_code);
     console.log("effectAnmData",effectAnmData0);
     mapDom.value.callAction("switchSceneView", "2843");//放在条件判断中，这是东校区中转视角，还有个西校区的
+    pointDetailsData.value = null;
     mapDom.value.callAction("displayEffect", effectAnmData0.toString());
 }
 

@@ -41,8 +41,8 @@ function effectDisplay(){
 
 function sceneAnmClick(){
     emits("sceneAnmClick");
-    
 }
+
 
 </script>
 
