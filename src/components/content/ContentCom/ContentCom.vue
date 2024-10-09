@@ -10,7 +10,7 @@
     <div :class="`content-com content-com-size${styleId}`">
         <img src="./images/close-icon.png" class="close-btn" @click="closeBtnClick" alt="">
         <slot />
-        <img v-if="styleId === 3" src="./images/scene-anm.png" class="scene-exploration" alt="" @click="effectDisplay"/>
+        <img v-if="styleId === 3" src="./images/scene-anm.png" class="scene-exploration" alt="" @click.stop="effectDisplay"/>
     </div>
     <CartoonCom v-if="styleId === 3" @sceneAnmClick="sceneAnmClick"/>
 </template>
