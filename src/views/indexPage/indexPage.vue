@@ -216,10 +216,10 @@ function effectDisplay() {
 
 function sceneAnmClick() {
     let anmData = { roamId: 158 + parseInt(thePointData.value.index_code), IsLoop: "0" };
+    let effectAnmData = 234 + parseInt(thePointData.value.index_code);
     console.log("anmData",JSON.stringify(anmData));
     mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
-    mapDom.value.callAction("hideEffect", "139");
-
+    mapDom.value.callAction("hideEffect", effectAnmData);
 }
 </script>
 <style lang="scss" scoped>
