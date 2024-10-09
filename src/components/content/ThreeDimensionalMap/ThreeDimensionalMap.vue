@@ -96,7 +96,7 @@ function emitStart() {
 
 //触发事件 (事件名称,传入参数（类型为字符类型）)
 function callAction(action, data = "", fun = null) {
-  console.log(`当前事件名称:${action},当前参数:${JSON.stringify()},调用时间:${getTime()}`);
+  console.log(`当前事件名称:${action},当前参数:${data},调用时间:${getTime()}`);
   socket.value?.emit(action, data, function (rspData) {
     console.log(`事件调用成功回调${action} 回调参数:${rspData} 回调时间:${getTime()}`);
     fun?.(rspData);

@@ -14,7 +14,8 @@
         <!-- 右侧按钮 -->
         <OperateBtnCom :data="operateData" @operateBtnClick="operateBtnClick" />
         <!-- 点位详情页 -->
-        <ContentCom :styleId="3" v-if="pointDetailsData" @closeBtnClick="pointDetailsData = null" >
+        <ContentCom :styleId="3" v-if="pointDetailsData" @closeBtnClick="pointDetailsData = null"
+            @effectDisplay="effectDisplay" @sceneAnmClick="sceneAnmClick">
             <GlobalTitle :title="pointDetailsData.name" style="margin-top:3vh;" />
             <details-content :data="pointDetailsData" :htmlBool="true" style="padding: 2vh 0;box-sizing: border-box;" />
         </ContentCom>
@@ -38,7 +39,7 @@
             </template>
         </ContentCom>
         <!-- 卡通人物 -->
-        
+
         <div class="quit-style">退出</div>
     </div>
 </template>
@@ -64,6 +65,7 @@ const theOperateData = ref(null);//记录当前点击分类的数据
 const detailsContentData = ref(null);//详情页数据
 const pointDetailsData = ref(null);//点位详情页数据
 const swiperContentData = ref([]);//轮播图页面数据
+const thePointData = ref(null);
 onMounted(() => {
     RequestIntroductionList().then(res => {
         res.data.forEach((item, index) => {
@@ -71,34 +73,24 @@ onMounted(() => {
         });
     });
 
-   
+
     bus.off();
     //监听场景是否加载成功
     bus.on('sceneLoadComplete', () => {
-        setTimeout(()=>{
+        setTimeout(() => {
             navigationClick(0);
         })
     });
     //接受点位点击的数据
     bus.on('pointClickComplete', (pointData) => {
-        console.log("点位数据",pointData);
+        console.log("点位数据", pointData);
+        thePointData.value = pointData;
         clearData();//清除旧数据
         RequestScenicIdFun(pointData.index_code);
     });
-   
+
 });
 
-
-//特效显示
-// function effectDisplay(){
-//     let effectId = "139";//实际上要获取点击web端标签获得的POI点位的id
-//     mapDom.value.callAction("displayEffect", effectId);
-// }
-//特效隐藏
-// function effectHide(){
-//     let effectId = "139";//实际上要获取点击web端标签获得的POI点位的id
-//     mapDom.value.callAction("hideEffect",effectId);
-// }
 //POI点位视角推进
 // function pointViewSwitch(poiId){//要获取web端点击获得设备编号
 //     mapDom.value.callAction("switchpointView",poiId);
@@ -204,14 +196,30 @@ function RequestIntroductionIdFun(id) {
 }
 
 //通过id获取点位详情页数据
-function RequestScenicIdFun(id){
+function RequestScenicIdFun(id) {
     if (id) {
         RequestScenicId(id).then(resData => {
             resData.data.path = [resData.data.path];
             pointDetailsData.value = resData.data;
-            console.log("pointDetailsData.value",pointDetailsData.value);
+            console.log("pointDetailsData.value", pointDetailsData.value);
         })
     }
+}
+
+function effectDisplay() {
+    let effectAnmData = 234 + parseInt(thePointData.value.index_code);
+    console.log("effectAnmData",effectAnmData);
+    mapDom.value.callAction("switchSceneView", "2843");//放在条件判断中，这是东校区中转视角，还有个西校区的
+    mapDom.value.callAction("displayEffect", effectAnmData);
+
+}
+
+function sceneAnmClick() {
+    let anmData = { roamId: 158 + parseInt(thePointData.value.index_code), IsLoop: "0" };
+    console.log("anmData",JSON.stringify(anmData));
+    mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
+    mapDom.value.callAction("hideEffect", "139");
+
 }
 </script>
 <style lang="scss" scoped>
