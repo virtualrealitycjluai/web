@@ -207,10 +207,10 @@ function RequestScenicIdFun(id) {
 }
 
 function effectDisplay() {
-    let effectAnmData = 234 + parseInt(thePointData.value.index_code);
-    console.log("effectAnmData",effectAnmData);
+    let effectAnmData0 = 234 + parseInt(thePointData.value.index_code);
+    console.log("effectAnmData",effectAnmData0);
     mapDom.value.callAction("switchSceneView", "2843");//放在条件判断中，这是东校区中转视角，还有个西校区的
-    mapDom.value.callAction("displayEffect", effectAnmData);
+    mapDom.value.callAction("displayEffect", effectAnmData0.toString);
 
 }
 
@@ -219,7 +219,7 @@ function sceneAnmClick() {
     let effectAnmData = 234 + parseInt(thePointData.value.index_code);
     console.log("anmData",JSON.stringify(anmData));
     mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
-    mapDom.value.callAction("hideEffect", effectAnmData);
+    mapDom.value.callAction("hideEffect", effectAnmData.toString);
 }
 </script>
 <style lang="scss" scoped>
