@@ -33,7 +33,7 @@ function sceneAnmClick(){
 
     .talk-style {
         width: 26.8vh;
-        height: 15.4vh;
+        height: 12.4vh;
         background-image: url("./images/talk-background.png");
         background-size: 100% 100%;
         position: absolute;
@@ -46,11 +46,10 @@ function sceneAnmClick(){
         font-family: none;
         padding: 2.3vh;
         box-sizing: border-box;
-        opacity: 1;
 
         img {
-            width: 8.75vh;
-            height: 2vh;
+            width: 7vh;
+            height: 1.6vh;
             position: absolute;
             bottom: 3.8vh;
             right: 1.9vh;

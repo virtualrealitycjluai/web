@@ -17,11 +17,11 @@ const props = defineProps({
   },
   keyValue: { //key 已更改
     type: String,
-    default: "d21fe88035f6cbc2a81aa25af04e9e5c",
+    default: "61b001bc86bfcb010ef8cedd0efb382b",
   },
   secretKeyValue: { //密钥 已更改
     type: String,
-    default: "09377afd9f59d165e1f775de7012ab78",
+    default: "d04aad024625f6876d2cd53cd25d2c7f",
   }
 });
 
