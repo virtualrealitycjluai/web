@@ -13,7 +13,7 @@ import { onMounted, ref, defineProps, defineExpose } from "vue";
 const props = defineProps({
   socketUrlValue: { //socket链接地址
     type: String,
-    default: "ws://vunity.xuanyantech.com:9801/web",
+    default: "wss://szls-kfxx.cjlu.edu.cn/web",
   },
   keyValue: { //key 已更改
     type: String,
@@ -53,7 +53,7 @@ function start(socketUrl, key, secret) {
   socket.value.on("error", function () {
     console.log("error");
   });
-
+  console.log("ttt");
   //场景初始化完成事件
   socket.value.on("sceneLoadComplete", () => {
     console.log("场景初始化完成事件");

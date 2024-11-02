@@ -119,38 +119,38 @@ function navigationClick(index) {
     let type = { typeDatas: [] };//类型数据
     if (index === 0) {
         //总览
-        viewId = "2838";
+        viewId = "3626";
         type.typeDatas = [""];
     }
     else if (index === 1) {
         //东校区
-        viewId = "2842";
-        type.typeDatas = ["1247"];
+        viewId = "3627";
+        type.typeDatas = ["1287"];
     }
     else if (index === 2) {
         //东生活区
-        viewId = "2854";
-        type.typeDatas = ["1249"];
+        viewId = "3628";
+        type.typeDatas = [""];
     }
     else if (index === 3) {
         //西校区
-        viewId = "2843";
-        type.typeDatas = ["1241"];
+        viewId = "3629";
+        type.typeDatas = ["1286"];
     }
     else if (index === 4) {
         //西生活区
-        viewId = "2855";
-        type.typeDatas = ["1245"];
+        viewId = "3630";
+        type.typeDatas = [""];
     }
     else if (index === 5) {
         //文化景点
-        viewId = "2857";
-        type.typeDatas = ["1243"];
+        viewId = "3631";
+        type.typeDatas = ["1288"];
     }
     else if (index === 6) {
         //道路
-        viewId = "2856";
-        type.typeDatas = ["1240"];
+        viewId = "3632";
+        type.typeDatas = ["1291"];
     }
 
     //切换场景视角
