@@ -39,7 +39,7 @@
             </template>
         </ContentCom>
         <!-- 卡通人物 -->
-
+        <CartoonCom @sceneAnmClick="sceneAnmClick"/>
         <div class="quit-style" @quitFunction="quitFunction">退出</div>
     </div>
 </template>

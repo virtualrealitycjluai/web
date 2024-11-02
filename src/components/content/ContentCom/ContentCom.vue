@@ -1,23 +1,16 @@
-<!--
- * @Author: zhangzhe 437050740@qq.com
- * @Date: 2024-09-22 16:36:55
- * @LastEditors: zhangzhe 437050740@qq.com
- * @LastEditTime: 2024-09-25 00:49:00
- * @FilePath: \marketf:\web\liangda-navigator\src\components\content\ContentCom\contentCom.vue
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
 <template>
     <div v-if="showContent" :class="`content-com content-com-size${styleId}`">
         <img src="./images/close-icon.png" class="close-btn" @click="closeBtnClick" alt="">
         <slot />
         <img v-if="styleId === 3" src="./images/scene-anm.png" class="scene-exploration" alt="" @click.stop="effectDisplay"/>
     </div>
-    <CartoonCom v-if="styleId === 3" @sceneAnmClick="sceneAnmClick"/>
+    <!-- <CartoonCom @sceneAnmClick="sceneAnmClick"/> -->
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, defineProps, defineEmits } from "vue";
-const showContent = ref(true); // 控制 <div> 的显示
+import bus from "@/utils/bus.js";
+const showContent = ref(null); // 控制 <div> 的显示
 defineProps({
     styleId: {
         type: Number,
@@ -28,23 +21,28 @@ defineProps({
 const emits = defineEmits(["closeBtnClick", "sceneAnmClick", "effectDisplay"]);
 
 onMounted(() => {
+    showContent.value = true;
 });
 onUnmounted(() => {
+    showContent.value = false;
 });
 
 function closeBtnClick(){
     emits("closeBtnClick");
+    bus.emit("closeContent");
 }
 
+// 显示路线特效
 function effectDisplay(){
     showContent.value = false; // 隐藏 <div>
     emits("effectDisplay");
 }
 
-function sceneAnmClick(){
-    emits("sceneAnmClick");
-    emits("closeBtnClick");
-}
+// // 场景漫游
+// function sceneAnmClick(){
+//     emits("sceneAnmClick");
+//     emits("closeBtnClick");
+// }
 
 
 </script>
