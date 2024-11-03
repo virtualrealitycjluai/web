@@ -25,8 +25,8 @@
 import { ref, defineEmits, onMounted, onUnmounted } from "vue";
 import bus from "@/utils/bus.js";
 const showTalkBool = ref(null); //对话框显隐
-const showPopup = ref(false);// 对话提示显隐，false间隔显示，true不显示
-const flag = ref(false); 
+const showPopup = ref(false);
+const flag = ref(false); // 对话提示显隐，false间隔显示，true不显示
 const emits = defineEmits(["sceneAnmClick"]);
 
 onMounted(() => {
@@ -40,12 +40,16 @@ onMounted(() => {
 
   bus.on("closeContent", () => {
     showTalkBool.value = false; // 监听到关闭点位，隐藏对话框
+    flag.value = false; // 监听到关闭点位，开启自动显示提示
+    randomShowPopup();
+    console.log(flag.value);
   });
   if (!flag.value) {
     console.log(flag.value);
     randomShowPopup();
   }
 });
+
 onUnmounted(() => {
   showPopup.value = false;
 });
@@ -53,11 +57,11 @@ onUnmounted(() => {
 function randomShowPopup() {
   const randomDelay = Math.random() * 5000 + 5000; // 5到10秒间隔
   setTimeout(() => {
+    console.log(flag.value);
     showPopup.value = true;
     setTimeout(() => {
       showPopup.value = false;
       if (!flag.value) {
-        console.log(flag.value);
         randomShowPopup(); // 循环调用
       }
     }, 4000); // 显示4秒后隐藏
