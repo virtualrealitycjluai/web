@@ -53,7 +53,7 @@ function start(socketUrl, key, secret) {
   socket.value.on("error", function () {
     console.log("error");
   });
-  console.log("ttt");
+
   //场景初始化完成事件
   socket.value.on("sceneLoadComplete", () => {
     console.log("场景初始化完成事件");

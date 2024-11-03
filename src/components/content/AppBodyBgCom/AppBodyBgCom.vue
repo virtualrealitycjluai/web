@@ -10,7 +10,7 @@
     <div class="app-top">
         <img src="./images/labelTop.png" class="app-top-bg" alt="">
         <div class="app-title">
-            量大校园地图
+            量大智能校园地图
         </div>
         <div class="app-menu">
             <el-dropdown>
