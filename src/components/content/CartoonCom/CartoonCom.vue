@@ -18,6 +18,34 @@
     <div class="popup-dialog" :class="{ show: showPopup }">
       点击我可以与我对话哦
     </div>
+
+    <div v-if="showChatBox" class="chat-box-modal">
+      <div class="chat-box">
+        <div class="input-container">
+          <textarea
+            v-model="userInput"
+            placeholder="来试试和我聊天吧"
+            rows="20"
+            class="intput-box"
+          ></textarea>
+          <button class="send-button" @click="sendMessage">发送</button>
+        </div>
+
+        <div class="output-container" v-if="aiResponse">
+          <textarea
+            v-model="aiResponse"
+            rows="20"
+            class="output-box"
+            readonly
+          ></textarea>
+        </div>
+        <img
+          src="./images/close-icon.png"
+          class="close-button"
+          @click="closeChatBox"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,6 +55,11 @@ import bus from "@/utils/bus.js";
 const showTalkBool = ref(null); //对话框显隐
 const showPopup = ref(false);
 const flag = ref(false); // 对话提示显隐，false间隔显示，true不显示
+
+const showChatBox = ref(false); // 控制聊天框显隐
+const userInput = ref(""); // 用户输入
+const aiResponse = ref(""); // AI 回复
+
 const emits = defineEmits(["sceneAnmClick"]);
 
 onMounted(() => {
@@ -72,6 +105,33 @@ function sceneAnmClick() {
   showTalkBool.value = false; // 漫游，隐藏对话框
   emits("sceneAnmClick");
 }
+
+function talkWithAI() {
+  showChatBox.value = true; // 显示聊天框
+}
+
+function closeChatBox() {
+  showChatBox.value = false; // 隐藏聊天框
+  userInput.value = ""; 
+  aiResponse.value = ""; 
+}
+
+function sendMessage() {
+  fetchAIResponse(userInput.value).then((response) => {
+    aiResponse.value = response; //
+    userInput.value = ""; 
+  });
+}
+
+//更改此函数，使用api获取大模型回复
+async function fetchAIResponse(message) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(`${message}`); 
+    }, 1000);
+  });
+}
+
 </script>
 <style lang="scss">
 .cartoon-com {
@@ -83,6 +143,7 @@ function sceneAnmClick() {
   right: 100px;
   bottom: 0;
   cursor: pointer;
+
   .popup-dialog {
     position: absolute;
     bottom: 25vh;
@@ -95,9 +156,7 @@ function sceneAnmClick() {
     transition: opacity 1s ease, visibility 1s ease;
     opacity: 0;
     visibility: hidden;
-  }
 
-  .popup-dialog {
     &.show {
       opacity: 1;
       visibility: visible;
@@ -116,7 +175,6 @@ function sceneAnmClick() {
     font-size: 1.5vh;
     color: #1f4470;
     line-height: 2.2vh;
-    font-family: none;
     padding: 2.3vh;
     box-sizing: border-box;
 
@@ -136,6 +194,87 @@ function sceneAnmClick() {
       bottom: 5vh;
       right: 14vh;
       cursor: pointer;
+    }
+  }
+
+  .chat-box-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("./images/talk-background-2.png");
+    background-size: cover;
+    background-position: center;
+    width: 600px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    padding: 20px; // 内边距
+
+    .chat-box {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 100%;
+
+      .input-container {
+        margin-right: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 45%;
+      }
+
+      .output-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 45%;
+      }
+
+      .input-box {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        resize: none;
+        overflow-y: auto; // 超出部分出现垂直滚动条（未实现）
+        max-height: 100%;
+      }
+
+      .output-box {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        resize: none;
+        overflow-y: auto; // 超出部分出现垂直滚动条（未实现）
+        max-height: 100%;
+      }
+
+      .send-button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #45a049; 
+        }
+      }
+
+      .close-button {
+        width: 3.7vh;
+        height: 3.7vh;
+        position: absolute;
+        top: 1.5vh;
+        right: 1.5vh;
+        cursor: pointer;
+      }
     }
   }
 }
