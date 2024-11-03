@@ -78,10 +78,10 @@ onUnmounted(() => {
 function selectCampus(index) {
   if (index === 0) {
     console.log("东校区");
-    mapDom.value.callAction("switchSceneView","2842");
+    mapDom.value.callAction("switchSceneView","3627");
   } else {
     console.log("西校区");
-    mapDom.value.callAction("switchSceneView","2843");
+    mapDom.value.callAction("switchSceneView","3629");
   }
 }
 </script>
