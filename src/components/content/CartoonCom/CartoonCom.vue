@@ -50,6 +50,7 @@
 </template>
 
 <script setup>
+import axios from 'axios';
 import { ref, defineEmits, onMounted, onUnmounted } from "vue";
 import bus from "@/utils/bus.js";
 const showTalkBool = ref(null); //对话框显隐
@@ -125,11 +126,36 @@ function sendMessage() {
 
 //更改此函数，使用api获取大模型回复
 async function fetchAIResponse(message) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(`${message}`); 
-    }, 1000);
-  });
+  const body = {
+    app_id: "de54f865-787d-4f58-beb6-cf8c3a4f2433", // Replace with your actual app_id
+    query: message,
+    stream: false, // Change to true if you want streaming responses
+    conversation_id: "355a4f4e-a6d8-4dec-b840-7075030c6d22", // Replace with your actual conversation_id
+    file_ids: [
+      // Include any file IDs if needed
+    ]
+  };
+
+  try {
+    const response = await axios.post('https://qianfan.baidubce.com/v2/app/conversation/runs', body, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Appbuilder-Authorization': 'bce-v3/ALTAK-bpO0KTq1c71tjlvHsCenm/13f3bd08f3ecddcbd5a6a380a21213c2d92007de'
+      }
+    });
+
+    // Assuming the response structure is as specified
+    if (response.data && response.data.outputs) {
+      // You can modify this part based on the actual structure of the response
+      const outputText = response.data.outputs.text || 'No response from AI';
+      return outputText;
+    } else {
+      return 'Unexpected response format';
+    }
+    } catch (error) {
+    console.error('Error fetching AI response:', error);
+    return 'Error communicating with AI';
+    }
 }
 
 </script>
