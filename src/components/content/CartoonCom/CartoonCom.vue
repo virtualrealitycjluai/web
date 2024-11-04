@@ -152,13 +152,14 @@ async function fetchAIResponse(message) {
     } else {
       return 'Unexpected response format';
     }
-    } catch (error) {
+  } catch (error) {
     console.error('Error fetching AI response:', error);
     return 'Error communicating with AI';
-    }
+  }
 }
-
 </script>
+
+
 
 <style lang="scss">
 .cartoon-com {

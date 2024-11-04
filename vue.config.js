@@ -41,7 +41,8 @@ module.exports = defineConfig({
   //   proxy: {
   //     //配置跨域
   //     "/api": {
-  //       target: base, //填写请求的目标地址
+  //       target: 'https://qianfan.baidubce.com/v2/app/conversation/runs', //填写请求的目标地址
+  //       changeOrigin: true,
   //       pathRewrite: {
   //         "^/api": "", //请求的时候使用这个api就可以
   //       }
