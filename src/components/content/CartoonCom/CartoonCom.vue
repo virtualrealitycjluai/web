@@ -159,6 +159,7 @@ async function fetchAIResponse(message) {
 }
 
 </script>
+
 <style lang="scss">
 .cartoon-com {
   width: 32vh;
