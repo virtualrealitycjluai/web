@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import axios from 'axios';
+import axios from "axios";
 import { ref, defineEmits, onMounted, onUnmounted } from "vue";
 import bus from "@/utils/bus.js";
 const showTalkBool = ref(null); //对话框显隐
@@ -113,48 +113,37 @@ function talkWithAI() {
 
 function closeChatBox() {
   showChatBox.value = false; // 隐藏聊天框
-  userInput.value = ""; 
-  aiResponse.value = ""; 
+  userInput.value = "";
+  aiResponse.value = "";
 }
 
 function sendMessage() {
   fetchAIResponse(userInput.value).then((response) => {
     aiResponse.value = response; //
-    userInput.value = ""; 
+    userInput.value = "";
   });
 }
 
-//更改此函数，使用api获取大模型回复
 async function fetchAIResponse(message) {
   const body = {
-    app_id: "de54f865-787d-4f58-beb6-cf8c3a4f2433", // Replace with your actual app_id
+    app_id: "de54f865-787d-4f58-beb6-cf8c3a4f2433",
     query: message,
-    stream: false, // Change to true if you want streaming responses
-    conversation_id: "355a4f4e-a6d8-4dec-b840-7075030c6d22", // Replace with your actual conversation_id
-    file_ids: [
-      // Include any file IDs if needed
-    ]
+    stream: false,
+    conversation_id: "355a4f4e-a6d8-4dec-b840-7075030c6d22",
+    file_ids: []
   };
 
   try {
-    const response = await axios.post('https://qianfan.baidubce.com/v2/app/conversation/runs', body, {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Appbuilder-Authorization': 'bce-v3/ALTAK-bpO0KTq1c71tjlvHsCenm/13f3bd08f3ecddcbd5a6a380a21213c2d92007de'
-      }
-    });
-
-    // Assuming the response structure is as specified
+    const response = await axios.post('/api', body);
     if (response.data && response.data.outputs) {
-      // You can modify this part based on the actual structure of the response
-      const outputText = response.data.outputs.text || 'No response from AI';
+      const outputText = response.data.outputs.text || 'AI 没有回复';
       return outputText;
     } else {
-      return 'Unexpected response format';
+      return '响应格式异常';
     }
   } catch (error) {
-    console.error('Error fetching AI response:', error);
-    return 'Error communicating with AI';
+    console.error('获取 AI 回复时出错:', error);
+    return '与 AI 通信时出错';
   }
 }
 </script>
@@ -291,7 +280,7 @@ async function fetchAIResponse(message) {
         cursor: pointer;
 
         &:hover {
-          background-color: #45a049; 
+          background-color: #45a049;
         }
       }
 
