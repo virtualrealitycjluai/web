@@ -83,32 +83,6 @@ function selectCampus(index) {
 }
 </script>
 <style lang="scss">
-.el-dropdown-link {
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 2vh;
-    color: #1F4470;
-}
-
-.el-scrollbar .app-menu-view {
-    width: 9vh;
-    padding: 0.5vh 0;
-
-    .app-menu-view-child {
-        line-height: 3vh;
-        font-size: 1.5vh;
-        color: #1F4470; 
-        text-align: center;
-        cursor: pointer;
-    }
-
-    .app-menu-view-child:hover {
-        background: linear-gradient(0deg, #3ACAFF, #2486FF);
-        color: #FFFFFF;
-    }
-}
-
 .app-top {
     position: relative;
     top: 0;
@@ -116,35 +90,54 @@ function selectCampus(index) {
 
     .app-top-bg {
         width: 100%;
-    }
-
-    .app-title {
-        font-weight: bold;
-        font-size: 3.1vh;
-        color: #1F4470;
-        position: absolute;
-        top: 2.2vh;
-        left: 5vh;
+        position: relative;
     }
 
     .app-menu {
         position: absolute;
-        left: 48.5vh;
-        top: 1.8vh;
+        left: 3vh;
+        top: 5.4vh; /* Adjusted down */
+        font-size: 1.5vh; /* Dropdown font size slightly reduced */
     }
 
     .top-information {
         display: flex;
-        justify-content: space-between;
         position: absolute;
-        top: 2vh;
-        right: 2vh;
+        left: 15vh;
+        top: 5.4vh; /* Adjusted down */
 
         span {
-            font-size: 1.4vh;
+            font-size: 1.4vh; /* Original size for time and date display */
             font-weight: bold;
-            color: #1F4470;
+            color: #bdc688;
+            margin-right: 1vh;
         }
+    }
+}
+
+.el-dropdown-link {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.8vh;
+    color: #bdc688;
+}
+
+.el-scrollbar .app-menu-view {
+    width: 8vh;
+    padding: 0.5vh 0;
+
+    .app-menu-view-child {
+        line-height: 2.8vh;
+        font-size: 1.3vh;
+        color: #1F4470;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .app-menu-view-child:hover {
+        background: linear-gradient(0deg, #3ACAFF, #2486FF);
+        color: #FFFFFF;
     }
 }
 </style>
