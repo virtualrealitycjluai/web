@@ -92,6 +92,7 @@ function randomShowPopup() {
   const randomDelay = Math.random() * 5000 + 5000; // 5到10秒间隔
   setTimeout(() => {
     console.log(flag.value);
+    console.log(showTalkBool.value);
     showPopup.value = true;
     setTimeout(() => {
       showPopup.value = false;
@@ -109,12 +110,15 @@ function sceneAnmClick() {
 
 function talkWithAI() {
   showChatBox.value = true; // 显示聊天框
+  flag.value = true; // 显示聊天框后，关闭自动显示提示
 }
 
 function closeChatBox() {
   showChatBox.value = false; // 隐藏聊天框
   userInput.value = "";
   aiResponse.value = "";
+  flag.value = true; // 关闭聊天框后，开启自动显示提示
+  randomShowPopup();
 }
 
 function sendMessage() {
