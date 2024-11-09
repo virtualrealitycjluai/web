@@ -53,16 +53,9 @@ module.exports = defineConfig({
 
   devServer: {
     proxy: {
-      '/api': {
+      '/v2': {
         target: 'https://qianfan.baidubce.com',
         changeOrigin: true,
-        pathRewrite: {
-          '^/api': '/v2/app/conversation/runs'
-        },
-        onProxyReq: (proxyReq, req, res) => {
-          proxyReq.setHeader('Content-Type', 'application/json');
-          proxyReq.setHeader('X-Appbuilder-Authorization', 'Bearer bce-v3/ALTAK-3w5g407AVbIwsCGACir4P/9908f731558420188d1837982a26aca93914c70d');
-        }
       }
     }
   }

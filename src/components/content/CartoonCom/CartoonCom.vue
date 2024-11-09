@@ -124,19 +124,39 @@ function sendMessage() {
   });
 }
 
+// async function get_conversation_id(){
+//   const headers = {
+//     'X-Appbuilder-Authorization': 'Bearer bce-v3/ALTAK-3w5g407AVbIwsCGACir4P/9908f731558420188d1837982a26aca93914c70d',
+//     'Content-Type': 'application/json'
+//   };
+//   var raw = JSON.stringify({
+//     app_id: "de54f865-787d-4f58-beb6-cf8c3a4f2433",
+//   });
+//   const response = await axios.post('/v2/app/conversation', raw, { headers });
+//   const parsedJson = response.data
+//   console.log(parsedJson.conversation_id)
+//   return parsedJson.conversation_id
+// }
+
 async function fetchAIResponse(message) {
-  const body = {
+  // const c_id = get_conversation_id()
+  const headers = {
+    'X-Appbuilder-Authorization': 'Bearer bce-v3/ALTAK-3w5g407AVbIwsCGACir4P/9908f731558420188d1837982a26aca93914c70d',
+    'Content-Type': 'application/json'
+  };
+  var raw = JSON.stringify({
     app_id: "de54f865-787d-4f58-beb6-cf8c3a4f2433",
     query: message,
     stream: false,
-    conversation_id: "355a4f4e-a6d8-4dec-b840-7075030c6d22",
-    file_ids: []
-  };
+    conversation_id: 'd35b19ec-d7cb-49a1-ad71-ebe615e0faa1',
+    file_ids: [],
+  });
 
   try {
-    const response = await axios.post('/api', body);
-    if (response.data && response.data.outputs) {
-      const outputText = response.data.outputs.text || 'AI 没有回复';
+    const response = await axios.post('/v2/app/conversation/runs', raw, { headers });
+    const parsedJson = response.data
+    if (parsedJson.answer != '') {
+      const outputText = parsedJson.answer;
       return outputText;
     } else {
       return '响应格式异常';
