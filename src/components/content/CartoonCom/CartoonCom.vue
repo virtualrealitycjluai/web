@@ -159,7 +159,7 @@ async function fetchAIResponse(message) {
       const outputText = parsedJson.answer;
       return outputText;
     } else {
-      return '响应格式异常';
+      return '没有获取到回答';
     }
   } catch (error) {
     console.error('获取 AI 回复时出错:', error);
