@@ -61,8 +61,8 @@
     </ContentCom>
     <!-- 卡通人物 -->
     <CartoonCom @sceneAnmClick="sceneAnmClick" />
-    <div class="quit-style" @quitFunction="quitFunction"></div>
-    <ShadowOverlay/>
+    <div class="quit-style" @click="quitFunction">退出<br />漫游</div>
+    <ShadowOverlay />
   </div>
 </template>
 <script setup>
@@ -232,10 +232,13 @@ function RequestScenicIdFun(id) {
 }
 
 function sceneAnmClick() {
-    let anmData = { roamId: 106 + parseInt(thePointData.value.index_code), IsLoop: "0" };
-    
-    console.log("anmData",JSON.stringify(anmData));
-    mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
+  let anmData = {
+    roamId: 106 + parseInt(thePointData.value.index_code),
+    IsLoop: "0",
+  };
+
+  console.log("anmData", JSON.stringify(anmData));
+  mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
 }
 
 function effectDisplay() {
@@ -259,10 +262,43 @@ function effectDisplay() {
   }
   mapDom.value.callAction("displayEffect", effectAnmData0.toString());
 }
+function quitFunction() {
+  console.log("用户点击了退出漫游按钮");
+  mapDom.value.callAction("deactivateRoam");
 
+  // 这里可以添加更多逻辑，例如显示提示信息，导航到其他页面等
+}
 </script>
 <style lang="scss" scoped>
 .index-page {
   width: 100%;
+  .quit-style {
+    position: fixed;
+    bottom: 40px;
+    left: 70px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* 圆形按钮 */
+    background-image: url("images/quit-bg1.png"); 
+    background-size: cover; 
+    background-position: 100% 30%; 
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-image 0.3s ease, transform 0.3s ease;
+    &:hover {
+      background-image: url("images/quit-bg2.png");
+      transform: scale(1.05);
+    }
+    &:active {
+      transform: scale(0.95);
+    }
+  }
 }
 </style>
