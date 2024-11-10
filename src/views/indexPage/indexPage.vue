@@ -182,6 +182,7 @@ function navigationClick(index) {
 function operateBtnClick(itemData) {
   theOperateData.value = itemData;
   console.log("itemData", itemData);
+  bus.emit("operateBtnClick");
   clearData();
   if (itemData.typeId) {
     RequestIntroductionType(itemData.typeId).then((res) => {

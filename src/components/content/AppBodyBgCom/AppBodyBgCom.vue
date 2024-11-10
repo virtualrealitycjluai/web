@@ -109,7 +109,7 @@ function selectCampus(index) {
         span {
             font-size: 1.4vh; /* Original size for time and date display */
             font-weight: bold;
-            color: #bdc688;
+            color: #BDC655;
             margin-right: 1vh;
         }
     }
@@ -120,7 +120,7 @@ function selectCampus(index) {
     align-items: center;
     font-weight: bold;
     font-size: 1.8vh;
-    color: #bdc688;
+    color: #BDC655;
 }
 
 .el-scrollbar .app-menu-view {

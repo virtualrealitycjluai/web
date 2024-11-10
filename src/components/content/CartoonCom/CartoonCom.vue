@@ -19,7 +19,7 @@
       点击我可以与我对话哦
     </div>
 
-    <div v-if="showChatBox" class="chat-box-modal">
+    <div v-if="showChatBox" class="chat-box-modal" @click.stop>
       <div class="chat-box">
         <div class="input-container">
           <textarea
@@ -31,13 +31,16 @@
           <button class="send-button" @click="sendMessage">发送</button>
         </div>
 
-        <div class="output-container" v-if="aiResponse">
+        <div class="output-container">
           <textarea
             v-model="aiResponse"
             rows="20"
             class="output-box"
             readonly
           ></textarea>
+          <div v-if="isLoading" class="loading-text">
+            正在等待AI回复...
+          </div>
         </div>
         <img
           src="./images/close-icon.png"
@@ -53,6 +56,7 @@
 import axios from "axios";
 import { ref, defineEmits, onMounted, onUnmounted } from "vue";
 import bus from "@/utils/bus.js";
+
 const showTalkBool = ref(null); //对话框显隐
 const showPopup = ref(false);
 const flag = ref(false); // 对话提示显隐，false间隔显示，true不显示
@@ -60,6 +64,7 @@ const flag = ref(false); // 对话提示显隐，false间隔显示，true不显�
 const showChatBox = ref(false); // 控制聊天框显隐
 const userInput = ref(""); // 用户输入
 const aiResponse = ref(""); // AI 回复
+const isLoading = ref(false); // 加载状态
 
 const emits = defineEmits(["sceneAnmClick"]);
 
@@ -78,6 +83,12 @@ onMounted(() => {
     randomShowPopup();
     console.log(flag.value);
   });
+
+  bus.on("operateBtnClick", () => {
+    flag.value = true; // 监听到右侧导航栏点击，关闭自动显示提示
+    console.log(flag.value);
+  });
+  
   if (!flag.value) {
     console.log(flag.value);
     randomShowPopup();
@@ -110,6 +121,7 @@ function sceneAnmClick() {
 
 function talkWithAI() {
   showChatBox.value = true; // 显示聊天框
+  showTalkBool.value = false // 关闭对话框
   flag.value = true; // 显示聊天框后，关闭自动显示提示
 }
 
@@ -117,62 +129,58 @@ function closeChatBox() {
   showChatBox.value = false; // 隐藏聊天框
   userInput.value = "";
   aiResponse.value = "";
-  flag.value = true; // 关闭聊天框后，开启自动显示提示
+  flag.value = false; // 关闭聊天框后，开启自动显示提示
   randomShowPopup();
 }
 
-function sendMessage() {
-  fetchAIResponse(userInput.value).then((response) => {
-    aiResponse.value = response; //
+async function sendMessage() {
+  if (userInput.value.trim() === "") {
+    return; // 如果输入为空，不发送请求
+  }
+  
+  isLoading.value = true; // 开始加载
+  try {
+    const response = await fetchAIResponse(userInput.value);
+    aiResponse.value = response;
+  } catch (error) {
+    aiResponse.value = "出错了，请稍后再试。";
+  } finally {
+    isLoading.value = false; // 结束加载
     userInput.value = "";
-  });
+  }
 }
 
-// async function get_conversation_id(){
-//   const headers = {
-//     'X-Appbuilder-Authorization': 'Bearer bce-v3/ALTAK-3w5g407AVbIwsCGACir4P/9908f731558420188d1837982a26aca93914c70d',
-//     'Content-Type': 'application/json'
-//   };
-//   var raw = JSON.stringify({
-//     app_id: "de54f865-787d-4f58-beb6-cf8c3a4f2433",
-//   });
-//   const response = await axios.post('/v2/app/conversation', raw, { headers });
-//   const parsedJson = response.data
-//   console.log(parsedJson.conversation_id)
-//   return parsedJson.conversation_id
-// }
-
 async function fetchAIResponse(message) {
-  // const c_id = get_conversation_id()
   const headers = {
-    'X-Appbuilder-Authorization': 'Bearer bce-v3/ALTAK-3w5g407AVbIwsCGACir4P/9908f731558420188d1837982a26aca93914c70d',
-    'Content-Type': 'application/json'
+    "X-Appbuilder-Authorization":
+      "Bearer bce-v3/ALTAK-3w5g407AVbIwsCGACir4P/9908f731558420188d1837982a26aca93914c70d",
+    "Content-Type": "application/json",
   };
-  var raw = JSON.stringify({
+  const raw = JSON.stringify({
     app_id: "de54f865-787d-4f58-beb6-cf8c3a4f2433",
     query: message,
     stream: false,
-    conversation_id: 'd35b19ec-d7cb-49a1-ad71-ebe615e0faa1',
+    conversation_id: "d35b19ec-d7cb-49a1-ad71-ebe615e0faa1",
     file_ids: [],
   });
 
   try {
-    const response = await axios.post('/v2/app/conversation/runs', raw, { headers });
-    const parsedJson = response.data
-    if (parsedJson.answer != '') {
+    const response = await axios.post("/v2/app/conversation/runs", raw, {
+      headers,
+    });
+    const parsedJson = response.data;
+    if (parsedJson.answer != "") {
       const outputText = parsedJson.answer;
       return outputText;
     } else {
-      return '没有获取到回答';
+      return "没有获取到回答";
     }
   } catch (error) {
-    console.error('获取 AI 回复时出错:', error);
-    return '与 AI 通信时出错';
+    console.error("获取 AI 回复时出错:", error);
+    return "与 AI 通信时出错";
   }
 }
 </script>
-
-
 
 <style lang="scss">
 .cartoon-com {
@@ -184,6 +192,7 @@ async function fetchAIResponse(message) {
   right: 100px;
   bottom: -50px;
   cursor: pointer;
+  z-index: 1001;
 
   .popup-dialog {
     position: absolute;
@@ -270,9 +279,15 @@ async function fetchAIResponse(message) {
 
       .output-container {
         display: flex;
-        align-items: center;
-        justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
         width: 45%;
+
+        .loading-text {
+          margin-top: 10px;
+          font-style: italic;
+          color: #888;
+        }
       }
 
       .input-box {
