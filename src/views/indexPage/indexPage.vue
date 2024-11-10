@@ -61,7 +61,9 @@
     </ContentCom>
     <!-- 卡通人物 -->
     <CartoonCom @sceneAnmClick="sceneAnmClick" />
-    <div class="quit-style" v-if="flag" @click="quitFunction">退出<br />漫游</div>
+    <div class="quit-style" v-if="flag" @click="quitFunction">
+      退出<br />漫游
+    </div>
     <ShadowOverlay />
   </div>
 </template>
@@ -89,12 +91,13 @@ const operateData = ref([
   { type: "虚拟博物馆", styleId: 0 },
   { type: "码上带走", styleId: 1 },
   { type: "操作引导", styleId: 2 },
-]); //分类数据组
-const theOperateData = ref(null); //记录当前点击分类的数据
-const detailsContentData = ref(null); //详情页数据
-const pointDetailsData = ref(null); //点位详情页数据
-const swiperContentData = ref([]); //轮播图页面数据
+]); // 分类数据组
+const theOperateData = ref(null); // 记录当前点击分类的数据
+const detailsContentData = ref(null); // 详情页数据
+const pointDetailsData = ref(null); // 点位详情页数据
+const swiperContentData = ref([]); // 轮播图页面数据
 const thePointData = ref(null);
+const currentEffectId = ref(null); // 记录特效暂时未用的特效路线id
 const flag = ref(null);
 onMounted(() => {
   RequestIntroductionList().then((res) => {
@@ -243,8 +246,8 @@ function sceneAnmClick() {
 }
 
 function effectDisplay() {
-  let effectAnmData0 = 163 + parseInt(thePointData.value.index_code);
-  console.log("effectAnmData", effectAnmData0);
+  let newEffectId = 163 + parseInt(thePointData.value.index_code);
+  console.log("新的特效ID:", newEffectId);
   // 东校区
   if (parseInt(thePointData.value.block_id) == 321) {
     mapDom.value.callAction("switchSceneView", "3627");
@@ -261,8 +264,19 @@ function effectDisplay() {
   else if (parseInt(thePointData.value.block_id) == 326) {
     mapDom.value.callAction("switchSceneView", "3632");
   }
-  mapDom.value.callAction("displayEffect", effectAnmData0.toString());
+
+  // 有激活没使用的特效，将其隐藏
+  if (currentEffectId.value !== null) {
+    mapDom.value.callAction("hideEffect", currentEffectId.value.toString());
+    console.log("隐藏旧的特效ID:", currentEffectId.value);
+  }
+  mapDom.value.callAction("displayEffect", newEffectId.toString());
+  console.log("显示新的特效ID:", newEffectId);
+
+  // 更新当前激活的特效ID
+  currentEffectId.value = newEffectId;
 }
+
 function quitFunction() {
   console.log("退出漫游");
   flag.value = false;
@@ -279,9 +293,9 @@ function quitFunction() {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background-image: url("images/quit-bg1.png"); 
-    background-size: cover; 
-    background-position: 100% 30%; 
+    background-image: url("images/quit-bg1.png");
+    background-size: cover;
+    background-position: 100% 30%;
     color: white;
     display: flex;
     align-items: center;

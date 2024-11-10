@@ -110,7 +110,6 @@ function randomShowPopup() {
   const randomDelay = Math.random() * 5000 + 5000; // 5到10秒间隔
   setTimeout(() => {
     console.log(flag.value);
-    console.log(showTalkBool.value);
     showPopup.value = true;
     setTimeout(() => {
       showPopup.value = false;
@@ -340,8 +339,8 @@ async function fetchAIResponse(message) {
         width: 3.7vh;
         height: 3.7vh;
         position: absolute;
-        top: 1.5vh;
-        right: 1.5vh;
+        top: 0.5vh;
+        right: 0.5vh;
         cursor: pointer;
       }
     }

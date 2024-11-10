@@ -87,11 +87,11 @@ function effectDisplay(){
     align-items: center;
 
     .close-btn {
-        width: 3.7vh;
-        height: 3.7vh;
+        width: 5vh;
+        height: 5vh;
         position: absolute;
-        top: 1.5vh;
-        right: 1.5vh;
+        top: 3.5vh;
+        right: 4vh;
         cursor: pointer;
     }
     .scene-exploration {
