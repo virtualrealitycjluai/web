@@ -118,7 +118,7 @@ onMounted(() => {
   });
 
   bus.on("roamEndComplete", () => {
-    let effectAnmData = 234 + parseInt(thePointData.value.index_code);
+    let effectAnmData = 163 + parseInt(thePointData.value.index_code);
     mapDom.value.callAction("hideEffect", effectAnmData.toString());
   });
 });
@@ -231,21 +231,15 @@ function RequestScenicIdFun(id) {
   }
 }
 
-// function effectDisplay() {
-//     let effectAnmData0 = 234 + parseInt(thePointData.value.index_code);
-//     console.log("effectAnmData",effectAnmData0);
-//     mapDom.value.callAction("switchSceneView", "2843");//放在条件判断中，这是东校区中转视角，还有个西校区的
-//     mapDom.value.callAction("displayEffect", effectAnmData0.toString());
-// }
+function sceneAnmClick() {
+    let anmData = { roamId: 106 + parseInt(thePointData.value.index_code), IsLoop: "0" };
+    
+    console.log("anmData",JSON.stringify(anmData));
+    mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
+}
 
-// function sceneAnmClick() {
-//     let anmData = { roamId: 158 + parseInt(thePointData.value.index_code), IsLoop: "0" };
-//     if(anmData.roamId>227) anmData.roamId += 8;
-//     console.log("anmData",JSON.stringify(anmData));
-//     mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
-// }
 function effectDisplay() {
-  let effectAnmData0 = 163;
+  let effectAnmData0 = 163 + parseInt(thePointData.value.index_code);
   console.log("effectAnmData", effectAnmData0);
   // 东校区
   if (parseInt(thePointData.value.block_id) == 321) {
@@ -263,16 +257,9 @@ function effectDisplay() {
   else if (parseInt(thePointData.value.block_id) == 326) {
     mapDom.value.callAction("switchSceneView", "3632");
   }
-
   mapDom.value.callAction("displayEffect", effectAnmData0.toString());
 }
 
-function sceneAnmClick() {
-  let anmData = { roamId: 104, IsLoop: "0" };
-  if (anmData.roamId > 227) anmData.roamId += 8;
-  console.log("anmData", JSON.stringify(anmData));
-  mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
-}
 </script>
 <style lang="scss" scoped>
 .index-page {
