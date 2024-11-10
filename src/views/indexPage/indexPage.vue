@@ -62,6 +62,7 @@
     <!-- 卡通人物 -->
     <CartoonCom @sceneAnmClick="sceneAnmClick" />
     <div class="quit-style" @quitFunction="quitFunction"></div>
+    <ShadowOverlay/>
   </div>
 </template>
 <script setup>
@@ -70,6 +71,8 @@ import { onMounted, ref, inject } from "vue";
 import detailsContent from "./components/detailsContent.vue";
 import schoolContent from "./components/schoolContent.vue";
 import museumContent from "./components/museumContent.vue";
+import ShadowOverlay from "./components/ShadowOverlay.vue";
+
 import {
   RequestIntroductionList,
   RequestIntroductionType,

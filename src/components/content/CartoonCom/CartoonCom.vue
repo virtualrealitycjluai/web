@@ -182,7 +182,7 @@ async function fetchAIResponse(message) {
   background-size: 100% 100%;
   position: absolute;
   right: 100px;
-  bottom: 0;
+  bottom: -50px;
   cursor: pointer;
 
   .popup-dialog {
