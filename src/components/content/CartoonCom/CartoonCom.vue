@@ -38,9 +38,7 @@
             class="output-box"
             readonly
           ></textarea>
-          <div v-if="isLoading" class="loading-text">
-            正在等待AI回复...
-          </div>
+          <div v-if="isLoading" class="loading-text">正在等待AI回复...</div>
         </div>
         <img
           src="./images/close-icon.png"
@@ -54,10 +52,11 @@
 
 <script setup>
 import axios from "axios";
-import { ref, defineEmits, onMounted, onUnmounted } from "vue";
+import { ref, defineEmits, onMounted, onUnmounted, watch } from "vue";
 import bus from "@/utils/bus.js";
 
-const showTalkBool = ref(null); //对话框显隐
+// 定义响应式变量
+const showTalkBool = ref(null); // 对话框显隐
 const showPopup = ref(false);
 const flag = ref(false); // 对话提示显隐，false间隔显示，true不显示
 
@@ -67,6 +66,13 @@ const aiResponse = ref(""); // AI 回复
 const isLoading = ref(false); // 加载状态
 
 const emits = defineEmits(["sceneAnmClick"]);
+
+// 监听 showTalkBool 的变化
+watch(showTalkBool, (newVal) => {
+  if (newVal === true) {
+    showPopup.value = false; // 隐藏 popup-dialog
+  }
+});
 
 onMounted(() => {
   showTalkBool.value = false; // 对话框初始不显示
@@ -88,7 +94,7 @@ onMounted(() => {
     flag.value = true; // 监听到右侧导航栏点击，关闭自动显示提示
     console.log(flag.value);
   });
-  
+
   if (!flag.value) {
     console.log(flag.value);
     randomShowPopup();
@@ -116,12 +122,17 @@ function randomShowPopup() {
 
 function sceneAnmClick() {
   showTalkBool.value = false; // 漫游，隐藏对话框
+  bus.on("roamEndComplete", () => {
+    console.log("漫游结束事件");
+    flag.value = false;
+    randomShowPopup();
+  });
   emits("sceneAnmClick");
 }
 
 function talkWithAI() {
   showChatBox.value = true; // 显示聊天框
-  showTalkBool.value = false // 关闭对话框
+  showTalkBool.value = false; // 关闭对话框
   flag.value = true; // 显示聊天框后，关闭自动显示提示
 }
 
@@ -137,7 +148,7 @@ async function sendMessage() {
   if (userInput.value.trim() === "") {
     return; // 如果输入为空，不发送请求
   }
-  
+
   isLoading.value = true; // 开始加载
   try {
     const response = await fetchAIResponse(userInput.value);
@@ -182,15 +193,16 @@ async function fetchAIResponse(message) {
 }
 </script>
 
+
 <style lang="scss">
 .cartoon-com {
   width: 32vh;
   height: 23.5vh;
-  background-image: url("./images/cartoon-icon-2.png");
+  background-image: url("./images/cartoon-icon.png");
   background-size: 100% 100%;
   position: absolute;
   right: 100px;
-  bottom: -50px;
+  bottom: -20px;
   cursor: pointer;
   z-index: 1001;
 
