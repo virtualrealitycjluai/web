@@ -61,7 +61,7 @@
     </ContentCom>
     <!-- 卡通人物 -->
     <CartoonCom @sceneAnmClick="sceneAnmClick" />
-    <div class="quit-style" @click="quitFunction">退出<br />漫游</div>
+    <div class="quit-style" v-if="flag" @click="quitFunction">退出<br />漫游</div>
     <ShadowOverlay />
   </div>
 </template>
@@ -95,6 +95,7 @@ const detailsContentData = ref(null); //详情页数据
 const pointDetailsData = ref(null); //点位详情页数据
 const swiperContentData = ref([]); //轮播图页面数据
 const thePointData = ref(null);
+const flag = ref(null);
 onMounted(() => {
   RequestIntroductionList().then((res) => {
     res.data.forEach((item, index) => {
@@ -236,7 +237,7 @@ function sceneAnmClick() {
     roamId: 106 + parseInt(thePointData.value.index_code),
     IsLoop: "0",
   };
-
+  flag.value = true;
   console.log("anmData", JSON.stringify(anmData));
   mapDom.value.callAction("activateRoam", JSON.stringify(anmData));
 }
@@ -264,6 +265,7 @@ function effectDisplay() {
 }
 function quitFunction() {
   console.log("退出漫游");
+  flag.value = false;
   mapDom.value.callAction("deactivateRoam");
 }
 </script>
