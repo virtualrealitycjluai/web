@@ -60,10 +60,10 @@ function operateBtnClick(itemData) {
     background-repeat: no-repeat; 
 
     .operate-btn {
-        width: 10vh;
+        width: 9vh;
         height: 10vh;
         cursor: pointer;
-        margin-bottom: 1vh;
+        margin-bottom: 0vh;
     }
 }
 </style>
