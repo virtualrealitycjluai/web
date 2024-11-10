@@ -98,8 +98,8 @@ function effectDisplay(){
     width: 8.75vh;
     height: 2vh;
     position: absolute;
-    bottom: 3.8vh;
-    right: 1.9vh;
+    bottom: 8vh;
+    right: 5vh;
     cursor: pointer;
 }
 

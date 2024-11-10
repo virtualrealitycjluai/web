@@ -106,7 +106,7 @@ onUnmounted(() => {
 });
 
 function randomShowPopup() {
-  const randomDelay = Math.random() * 5000 + 5000; // 5到10秒间隔
+  const randomDelay = Math.random() * 500 + 500; // 5到10秒间隔
   setTimeout(() => {
     console.log(flag.value);
     console.log(showTalkBool.value);
@@ -201,7 +201,7 @@ async function fetchAIResponse(message) {
   background-image: url("./images/cartoon-icon.png");
   background-size: 100% 100%;
   position: absolute;
-  right: 100px;
+  right: 110px;
   bottom: -20px;
   cursor: pointer;
   z-index: 1001;
@@ -209,7 +209,7 @@ async function fetchAIResponse(message) {
   .popup-dialog {
     position: absolute;
     bottom: 25vh;
-    right: 5vh;
+    right: 3vh;
     background-color: white;
     padding: 10px;
     border-radius: 5px;
@@ -234,18 +234,18 @@ async function fetchAIResponse(message) {
     top: 1vh;
     right: -6vh;
     transform: translate(-100%, -100%);
-    font-size: 1.5vh;
+    font-size: 1.6vh;
     color: #1f4470;
-    line-height: 2.2vh;
+    line-height: 2.5vh;
     padding: 2.3vh;
     box-sizing: border-box;
 
     .scene-anm-img {
-      width: 10vh;
-      height: 2vh;
+      width: 9.8vh;
+      height: 1.98vh;
       position: absolute;
-      bottom: 5vh;
-      right: 1.9vh;
+      bottom: 4vh;
+      right: 2.5vh;
       cursor: pointer;
     }
 
@@ -253,8 +253,8 @@ async function fetchAIResponse(message) {
       width: 10vh;
       height: 2vh;
       position: absolute;
-      bottom: 5vh;
-      right: 14vh;
+      bottom: 4vh;
+      right: 15vh;
       cursor: pointer;
     }
   }
@@ -308,7 +308,7 @@ async function fetchAIResponse(message) {
         border-radius: 5px;
         padding: 10px;
         resize: none;
-        overflow-y: auto; // 超出部分出现垂直滚动条（未实现）
+        overflow-y: auto; 
         max-height: 100%;
       }
 
@@ -318,7 +318,7 @@ async function fetchAIResponse(message) {
         border-radius: 5px;
         padding: 10px;
         resize: none;
-        overflow-y: auto; // 超出部分出现垂直滚动条（未实现）
+        overflow-y: auto; 
         max-height: 100%;
       }
 
