@@ -265,8 +265,6 @@ function effectDisplay() {
 function quitFunction() {
   console.log("用户点击了退出漫游按钮");
   mapDom.value.callAction("deactivateRoam");
-
-  // 这里可以添加更多逻辑，例如显示提示信息，导航到其他页面等
 }
 </script>
 <style lang="scss" scoped>
@@ -278,7 +276,7 @@ function quitFunction() {
     left: 70px;
     width: 100px;
     height: 100px;
-    border-radius: 50%; /* 圆形按钮 */
+    border-radius: 50%;
     background-image: url("images/quit-bg1.png"); 
     background-size: cover; 
     background-position: 100% 30%; 
