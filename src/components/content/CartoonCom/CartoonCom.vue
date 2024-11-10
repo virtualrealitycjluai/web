@@ -71,6 +71,7 @@ const emits = defineEmits(["sceneAnmClick"]);
 watch(showTalkBool, (newVal) => {
   if (newVal === true) {
     showPopup.value = false; // 隐藏 popup-dialog
+    
   }
 });
 
@@ -106,7 +107,7 @@ onUnmounted(() => {
 });
 
 function randomShowPopup() {
-  const randomDelay = Math.random() * 500 + 500; // 5到10秒间隔
+  const randomDelay = Math.random() * 5000 + 5000; // 5到10秒间隔
   setTimeout(() => {
     console.log(flag.value);
     console.log(showTalkBool.value);

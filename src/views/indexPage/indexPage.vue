@@ -263,7 +263,7 @@ function effectDisplay() {
   mapDom.value.callAction("displayEffect", effectAnmData0.toString());
 }
 function quitFunction() {
-  console.log("用户点击了退出漫游按钮");
+  console.log("退出漫游");
   mapDom.value.callAction("deactivateRoam");
 }
 </script>
