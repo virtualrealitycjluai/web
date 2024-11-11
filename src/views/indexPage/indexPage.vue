@@ -124,6 +124,7 @@ onMounted(() => {
   bus.on("roamEndComplete", () => {
     let effectAnmData = 163 + parseInt(thePointData.value.index_code);
     mapDom.value.callAction("hideEffect", effectAnmData.toString());
+    flag.value = false;
   });
 });
 
