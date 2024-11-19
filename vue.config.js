@@ -12,8 +12,8 @@ const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
 const { defineConfig } = require("@vue/cli-service");
 // const base = require('./src/network/config');
 module.exports = defineConfig({
-  publicPath: process.env.NODE_ENV === "development" ? "/" : "/光光对立贴贴队/",
-  outputDir: "光光对立贴贴队", //输出文件目录
+  publicPath: process.env.NODE_ENV === "development" ? "/" : "/arcaea/",
+  outputDir: "arcaea", //输出文件目录
   transpileDependencies: true,
   // element-plus在vue3.0中按需自动导入
   configureWebpack: {
